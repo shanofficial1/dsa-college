@@ -45,15 +45,13 @@ void BubbleSort(int arr[], int len){
 
 int main(){
 
-    int original[SIZE];
     int arr1[SIZE];
     int arr2[SIZE];
 
     srand(time(NULL));
-    generateRandom(original, SIZE);
+    generateRandom(arr1, SIZE);
 
-    copyArray(original, arr1, SIZE);
-    copyArray(original, arr2, SIZE);
+    copyArray(arr1, arr2, SIZE);
 
     struct timeval start, end;
     double time_taken;
@@ -62,7 +60,7 @@ int main(){
 
     // Selection Sort Timing
     gettimeofday(&start, NULL);
-    SelectionSort(arr2, SIZE);
+    SelectionSort(arr1, SIZE);
     gettimeofday(&end, NULL);
 
     time_taken =
@@ -74,7 +72,7 @@ int main(){
 
     // Bubble Sort Timing
     gettimeofday(&start, NULL);
-    BubbleSort(arr1, SIZE);
+    BubbleSort(arr2, SIZE);
     gettimeofday(&end, NULL);
 
     time_taken =
