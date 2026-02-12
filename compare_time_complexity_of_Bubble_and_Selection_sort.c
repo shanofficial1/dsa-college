@@ -5,10 +5,15 @@
 
 #define SIZE 10000
 
-// Generate 10,000 random numbers
 void generateRandom(int arr[], int size) {
     for(int i = 0; i < size; i++) {
         arr[i] = rand() % 100000;
+    }
+}
+
+void copyArray(int source[], int dest[], int size) {
+    for(int i = 0; i < size; i++) {
+        dest[i] = source[i];
     }
 }
 
@@ -26,7 +31,6 @@ void SelectionSort(int arr[], int len){
     }
 }
 
-// Bubble Sort
 void BubbleSort(int arr[], int len){
     for(int i = 0; i < len - 1; i++){
         for(int j = 0; j < len - i - 1; j++){
@@ -41,35 +45,40 @@ void BubbleSort(int arr[], int len){
 
 int main(){
 
-    int arr[SIZE];
+    int original[SIZE];
+    int arr1[SIZE];
+    int arr2[SIZE];
 
     srand(time(NULL));
-    generateRandom(arr, SIZE);
+    generateRandom(original, SIZE);
+
+    copyArray(original, arr1, SIZE);
+    copyArray(original, arr2, SIZE);
 
     struct timeval start, end;
+    double time_taken;
 
-    // Start time
+    // Bubble Sort Timing
     gettimeofday(&start, NULL);
-
-    BubbleSort(arr, SIZE);
-
-    // End time
+    BubbleSort(arr1, SIZE);
     gettimeofday(&end, NULL);
 
-    // Convert to seconds
-    double time_taken = 
-        (end.tv_sec - start.tv_sec) + 
+    time_taken =
+        (end.tv_sec - start.tv_sec) +
         (end.tv_usec - start.tv_usec) / 1000000.0;
 
-    printf("Bubble sort Time taken: %lf seconds\n", time_taken);
+    printf("Bubble Sort Time: %lf seconds\n", time_taken);
 
-
+    // Selection Sort Timing
     gettimeofday(&start, NULL);
-    SelectionSort(arr, SIZE);
+    SelectionSort(arr2, SIZE);
     gettimeofday(&end, NULL);
-    time_taken = 
-        (end.tv_sec - start.tv_sec) + 
+
+    time_taken =
+        (end.tv_sec - start.tv_sec) +
         (end.tv_usec - start.tv_usec) / 1000000.0;
-    printf("Selection sort Time taken: %lf seconds\n", time_taken);
+
+    printf("Selection Sort Time: %lf seconds\n", time_taken);
+
     return 0;
 }
