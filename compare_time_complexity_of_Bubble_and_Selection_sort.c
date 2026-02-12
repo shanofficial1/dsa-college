@@ -12,6 +12,20 @@ void generateRandom(int arr[], int size) {
     }
 }
 
+void SelectionSort(int arr[], int len){
+    for(int i = 0; i < len - 1; i++){
+        int min_idx = i;
+        for(int j = i + 1; j < len; j++){
+            if(arr[j] < arr[min_idx]){
+                min_idx = j;
+            }
+        }
+        int temp = arr[min_idx];
+        arr[min_idx] = arr[i];
+        arr[i] = temp;
+    }
+}
+
 // Bubble Sort
 void BubbleSort(int arr[], int len){
     for(int i = 0; i < len - 1; i++){
@@ -47,7 +61,15 @@ int main(){
         (end.tv_sec - start.tv_sec) + 
         (end.tv_usec - start.tv_usec) / 1000000.0;
 
-    printf("Time taken: %lf seconds\n", time_taken);
+    printf("Bubble sort Time taken: %lf seconds\n", time_taken);
 
+
+    gettimeofday(&start, NULL);
+    SelectionSort(arr, SIZE);
+    gettimeofday(&end, NULL);
+    time_taken = 
+        (end.tv_sec - start.tv_sec) + 
+        (end.tv_usec - start.tv_usec) / 1000000.0;
+    printf("Selection sort Time taken: %lf seconds\n", time_taken);
     return 0;
 }
