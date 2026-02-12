@@ -56,7 +56,7 @@ int main(){
     struct timeval start, end;
     double time_taken;
 
-    
+    printf("Comparing time complexity of Bubble Sort and Selection Sort for %d elements:\n", SIZE); 
 
     // Selection Sort Timing
     gettimeofday(&start, NULL);
