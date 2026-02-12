@@ -58,16 +58,7 @@ int main(){
     struct timeval start, end;
     double time_taken;
 
-    // Bubble Sort Timing
-    gettimeofday(&start, NULL);
-    BubbleSort(arr1, SIZE);
-    gettimeofday(&end, NULL);
-
-    time_taken =
-        (end.tv_sec - start.tv_sec) +
-        (end.tv_usec - start.tv_usec) / 1000000.0;
-
-    printf("Bubble Sort Time: %lf seconds\n", time_taken);
+    
 
     // Selection Sort Timing
     gettimeofday(&start, NULL);
@@ -79,6 +70,18 @@ int main(){
         (end.tv_usec - start.tv_usec) / 1000000.0;
 
     printf("Selection Sort Time: %lf seconds\n", time_taken);
+
+
+    // Bubble Sort Timing
+    gettimeofday(&start, NULL);
+    BubbleSort(arr1, SIZE);
+    gettimeofday(&end, NULL);
+
+    time_taken =
+        (end.tv_sec - start.tv_sec) +
+        (end.tv_usec - start.tv_usec) / 1000000.0;
+
+    printf("Bubble Sort Time: %lf seconds\n", time_taken);
 
     return 0;
 }
