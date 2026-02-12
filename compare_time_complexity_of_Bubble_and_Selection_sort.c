@@ -1,7 +1,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <sys/time.h>
 
+#define SIZE 10000
+
+// Function to generate random numbers (0 - 99999)
+void generateRandom(int arr[], int size) {
+    for(int i = 0; i < size; i++) {
+        arr[i] = rand() % 100000;
+    }
+}
+
+// Bubble Sort Function
 void BubbleSort(int arr[], int len){
     for(int i = 0; i < len - 1; i++){
         for(int j = 0; j < len - i - 1; j++){
@@ -16,23 +27,36 @@ void BubbleSort(int arr[], int len){
 
 int main(){
 
-    int arr[] = {1,43,2,3,97,32,34,2,13,435,76,23,45,67,89,90,12,34,56,78};
-    int len = sizeof(arr) / sizeof(arr[0]);
+    int arr[SIZE];
 
-    time_t start_time = time(NULL);
+    // Seed random generator
+    srand(time(NULL));
 
-    BubbleSort(arr, len);
+    // Generate 10,000 random numbers
+    generateRandom(arr, SIZE);
 
-    time_t end_time = time(NULL);
+    struct timeval start, end;
 
-    double time_taken = difftime(end_time, start_time);
+    // Start time
+    gettimeofday(&start, NULL);
 
-    printf("Sorted array: ");
-    for(int i = 0; i < len; i++){
+    // Sort
+    BubbleSort(arr, SIZE);
+
+    // End time
+    gettimeofday(&end, NULL);
+
+    // Calculate microseconds
+    long seconds = end.tv_sec - start.tv_sec;
+    long microseconds = end.tv_usec - start.tv_usec;
+    long total_time = (seconds * 1000000) + microseconds;
+
+    printf("First 10 sorted numbers:\n");
+    for(int i = 0; i < 10; i++){
         printf("%d ", arr[i]);
     }
 
-    printf("\nTime taken: %.0f seconds\n", time_taken);
+    printf("\nTime taken: %ld microseconds\n", total_time);
 
     return 0;
 }
